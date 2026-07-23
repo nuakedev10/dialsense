@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { supabaseServer } from "@/lib/supabase-server";
 import StatusBadge from "@/components/StatusBadge";
 import LogoutButton from "@/components/LogoutButton";
+import ExportButton from "@/components/ExportButton";
 import FilterSelect from "@/components/FilterSelect";
 import SiteHeader from "@/components/SiteHeader";
 import { ROLE_OPTIONS } from "@/lib/constants";
@@ -47,7 +49,12 @@ export default async function AdminDashboard({
             <h1 className="text-2xl font-semibold text-slate-900">Applicants</h1>
             <p className="mt-1 text-sm text-slate-500">{applicants.length} total</p>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-3">
+            <Suspense fallback={null}>
+              <ExportButton />
+            </Suspense>
+            <LogoutButton />
+          </div>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
